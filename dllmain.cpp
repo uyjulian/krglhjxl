@@ -17,7 +17,7 @@ void TVPLoadJXL(void* formatdata, void *callbackdata, tTVPGraphicSizeCallback si
 	int bit_width;
 	int bit_length;
 	uint8_t *bitmap_data;
-	JxlParallelRunner * runner;
+	void *runner;
 	JxlDecoder * dec;
 	const tjs_char *error_str;
 	tjs_uint8* input;

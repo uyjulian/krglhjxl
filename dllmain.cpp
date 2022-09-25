@@ -1,16 +1,11 @@
 
 #include <windows.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <string.h>
-#include <inttypes.h>
 
 #include "jxl/codestream_header.h"
 #include "jxl/decode.h"
 #include "jxl/resizable_parallel_runner.h"
 #include "jxl/types.h"
 
-#include <memory>
 #include "tp_stub.h"
 #define EXPORT(hr) extern "C" __declspec(dllexport) hr __stdcall
 

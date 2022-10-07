@@ -6,18 +6,6 @@ RC_LEGALCOPYRIGHT ?= Copyright (C) 2022-2022 Julian Uy; See details of license a
 
 include external/tp_stubz/Rules.lib.make
 
-ifeq (x$(TARGET_ARCH),xarm32)
-TARGET_CMAKE_SYSTEM_PROCESSOR ?= arm
-endif
-ifeq (x$(TARGET_ARCH),xarm64)
-TARGET_CMAKE_SYSTEM_PROCESSOR ?= arm64
-endif
-ifeq (x$(TARGET_ARCH),xintel64)
-TARGET_CMAKE_SYSTEM_PROCESSOR ?= amd64
-endif
-TARGET_CMAKE_SYSTEM_PROCESSOR ?= i686
-
-DEPENDENCY_BUILD_DIRECTORY := $(abspath build-$(TARGET_ARCH))
 DEPENDENCY_BUILD_DIRECTORY_LIBJXL := $(DEPENDENCY_BUILD_DIRECTORY)/libjxl
 
 EXTLIBS += $(DEPENDENCY_BUILD_DIRECTORY_LIBJXL)/lib/libjxl.a $(DEPENDENCY_BUILD_DIRECTORY_LIBJXL)/lib/libjxl_threads.a $(DEPENDENCY_BUILD_DIRECTORY_LIBJXL)/third_party/highway/libhwy.a $(DEPENDENCY_BUILD_DIRECTORY_LIBJXL)/third_party/brotli/libbrotlicommon-static.a $(DEPENDENCY_BUILD_DIRECTORY_LIBJXL)/third_party/brotli/libbrotlidec-static.a
@@ -38,7 +26,6 @@ $(DEPENDENCY_BUILD_DIRECTORY_LIBJXL)/third_party/brotli/libbrotlidec-static.a: $
 dllmain$(OBJECT_EXTENSION): $(DEPENDENCY_BUILD_DIRECTORY_LIBJXL)/lib/include/jxl/jxl_export.h
 
 $(DEPENDENCY_BUILD_DIRECTORY_LIBJXL)/lib/libjxl.a:
-	mkdir -p $(DEPENDENCY_BUILD_DIRECTORY_LIBJXL) && \
 	cmake \
 		-S external/libjxl \
 		-B $(DEPENDENCY_BUILD_DIRECTORY_LIBJXL) \
@@ -66,6 +53,3 @@ $(DEPENDENCY_BUILD_DIRECTORY_LIBJXL)/lib/libjxl.a:
 		-DJPEGXL_ENABLE_VIEWERS=OFF \
 		&& \
 	cmake --build $(DEPENDENCY_BUILD_DIRECTORY_LIBJXL)
-
-clean::
-	rm -rf $(DEPENDENCY_BUILD_DIRECTORY)

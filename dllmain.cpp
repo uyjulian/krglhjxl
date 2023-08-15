@@ -1,5 +1,9 @@
 
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
 #include <windows.h>
+#include <objidl.h>
 
 #include "jxl/codestream_header.h"
 #include "jxl/decode.h"
